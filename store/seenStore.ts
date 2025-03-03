@@ -26,12 +26,9 @@ const useSeenStore = create<SeenState>((set, get) => ({
     seen: {},
     setSeen: (id, date) => {
         const { seen } = get();
-        const lastSeen = seen[id];
-        if (!lastSeen || date > lastSeen) {
-
-            set({ seen: { ...seen, [id]: date } });
-            saveSeen(seen);
-        }
+        const newSeen = { ...seen, [id]: date };
+        set(newSeen);
+        saveSeen(newSeen);
     },
     init: () => set({ seen: getSeen() })
 }))

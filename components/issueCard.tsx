@@ -10,12 +10,15 @@ import useSeenStore from "@/store/seenStore";
 
 const { Meta } = Card
 
-function hashString(str: string) {
+function hashString(strs: string[]) {
     let hash = 0;
-    for (let i = 0; i < str.length; i++) {
-        const char = str.charCodeAt(i);
-        hash = ((hash << 5) - hash) + char;
-        hash = hash & hash; // Convert to 32bit integer
+    for (let i = 0; i < strs.length; i++) {
+        const str = strs[i];
+        for (let i = 0; i < str.length; i++) {
+            const char = str.charCodeAt(i);
+            hash = ((hash << 5) - hash) + char;
+            hash = hash & hash; // Convert to 32bit integer
+        }
     }
     return hash;
 }

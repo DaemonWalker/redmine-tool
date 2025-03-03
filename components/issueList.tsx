@@ -32,7 +32,7 @@ export const IssueList: FC<IState> = ({ save }) => {
             d = d.filter(p => p.backlog.indexOf(backlog) > -1);
         }
         if (assignee && assignee.length > 0) {
-            d = d.filter(p => assignee.includes(p.assignee));
+            d = d.filter(p => assignee.filter(q => p.assignee.includes(q)).length > 0);
         }
         const ids = d.map(d => d.id);
         return issues.filter(p => ids.includes(p.id));
@@ -48,6 +48,7 @@ export const IssueList: FC<IState> = ({ save }) => {
                     <IssueCard issue={item} data={data.find(p => p.id === `${item.id}`)!} />
                 </List.Item>)
             }}
+            style={{ padding: "0px 24px" }}
         />
     )
 }

@@ -1,8 +1,9 @@
 'use client'
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Form, Input, Select, Button, Row, Col } from 'antd';
 import useFilterStore from '../store/filterStore';
 import useEditorStore from '@/store/editorStore';
+import useIssueStore from '@/store/issueStore';
 
 const opts = {
     "allowClear": true,
@@ -12,9 +13,10 @@ const opts = {
 }
 
 export const ListFilter: React.FC = () => {
-    const { setId, setBacklog, setAssignee, assigneeOptions } = useFilterStore();
+    const { setId, setBacklog, setAssignee } = useFilterStore();
+    const { data, assigneeOptions } = useIssueStore();
     const { openEditor } = useEditorStore();
-
+    const options = useMemo(() => assigneeOptions(data), [data]);
     return (
         <Form
             name="filterForm"
@@ -33,7 +35,7 @@ export const ListFilter: React.FC = () => {
                     mode="multiple"
                     placeholder="请选择 Assignee"
                     onChange={value => setAssignee(value)}
-                    options={assigneeOptions.map(p => ({ label: p, value: p }))}
+                    options={options}
                     {...opts}
                 >
                 </Select>

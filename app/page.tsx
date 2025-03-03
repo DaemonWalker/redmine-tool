@@ -12,14 +12,14 @@ const App: React.FC = async () => {
     <>
       <CloseConfirmModal />
       <IssueEditorModal />
-      <Row gutter={[0, 24]}>
-        <Col span={24}>
+      <div style={{ height: "100%", width: "100%", display: "flex", flexDirection: "column" }}>
+        <div style={{ padding: 24, display: "flex", alignItems: "center", justifyContent: "center" }}>
           <ListFilter />
-        </Col>
-        <Col span={24}>
+        </div>
+        <div style={{ overflow: "auto" }}>
           <IssueList save={save} />
-        </Col>
-      </Row>
+        </div>
+      </div>
     </>
   );
 };

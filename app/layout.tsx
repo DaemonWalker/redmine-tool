@@ -7,13 +7,13 @@ import { InitStore } from '@/components/initStore';
 
 const RootLayout = ({ children }: React.PropsWithChildren) => (
   <html lang="en">
-    <body style={{ padding: 24, height: "100vh", width: "100vw" }}>
+    <body style={{ padding: 0, margin: 0 }}>
       <AntdRegistry>
-        <App>
+        <App style={{ height: "100vh", width: "100vw" }}>
           {children}
         </App>
       </AntdRegistry>
-      <InitStore/>
+      <InitStore />
     </body>
   </html>
 );
